@@ -2,55 +2,55 @@
 
 <img src="banner.svg" alt="Second Brain" width="800"/>
 
-**An AI that already knows who you are before you type a word.**
+**Uma IA que já sabe quem você é antes de você digitar uma palavra.**
 
-![macOS](https://img.shields.io/badge/macOS-✓-8A2BE2?style=flat-square) ![Windows](https://img.shields.io/badge/Windows-✓-8A2BE2?style=flat-square) ![Free](https://img.shields.io/badge/cost-free-8A2BE2?style=flat-square) ![One command](https://img.shields.io/badge/setup-one_command-8A2BE2?style=flat-square)
+![macOS](https://img.shields.io/badge/macOS-✓-8A2BE2?style=flat-square) ![Windows](https://img.shields.io/badge/Windows-✓-8A2BE2?style=flat-square) ![Linux](https://img.shields.io/badge/Linux-✓-8A2BE2?style=flat-square) ![Free](https://img.shields.io/badge/custo-grátis-8A2BE2?style=flat-square) ![One command](https://img.shields.io/badge/setup-um_comando-8A2BE2?style=flat-square)
 
-[Obsidian](https://obsidian.md) + [Claude Code](https://claude.ai/code) · Local · Private · One command
+[Obsidian](https://obsidian.md) + [Claude Code](https://claude.ai/code) · Local · Privado · Um comando
 
 ```
-  Your files (PDFs, docs, notes)
+  Seus arquivos (PDFs, docs, notas)
           │
           ▼
   ┌───────────────────┐
-  │   Obsidian vault  │  ← plain .md files on your computer
+  │   Obsidian vault  │  ← arquivos .md no seu computador
   │  inbox/  daily/   │
   │  projects/  ...   │
   └────────┬──────────┘
-           │  Claude Code reads this folder
+           │  Claude Code lê esta pasta
            ▼
   ┌───────────────────┐
-  │   Claude Code     │  ← knows your projects, voice, context
-  │   /vault-setup    │     before you type a single word
+  │   Claude Code     │  ← conhece seus projetos, voz, contexto
+  │   /vault-setup    │     antes de você digitar uma palavra
   │   /daily  /tldr   │
   └───────────────────┘
            │
            ▼
-    AI that compounds.
-    Session 1: knows your folders.
-    Session 20: knows more about
-    your work than you consciously remember.
+    IA que se acumula.
+    Sessão 1: conhece suas pastas.
+    Sessão 20: sabe mais sobre
+    seu trabalho do que você lembra conscientemente.
 ```
 
-*If this saves you hours, drop a ⭐ — it helps others find it.*
+*Se isso te economizou horas, deixe uma ⭐ — ajuda outros a encontrar.*
 
 </div>
 
 ---
 
-## Quick Start
+## Início Rápido
 
 ### macOS
 
-**Option A — One-liner** (paste this into Terminal and hit Enter):
+**Opção A — Uma linha** (cole no Terminal e pressione Enter):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/earlyaidopters/second-brain/main/setup.sh -o setup.sh && bash setup.sh
 ```
 
-**Option B — Clone the repo:**
+**Opção B — Clonar o repo:**
 
-Open **Terminal** (press `⌘ Space`, type `Terminal`, hit Enter) and run:
+Abra o **Terminal** (pressione `⌘ Space`, digite `Terminal`, Enter) e rode:
 
 ```bash
 git clone https://github.com/earlyaidopters/second-brain.git
@@ -58,28 +58,68 @@ cd second-brain
 ./setup.sh
 ```
 
-> **Don't have git?** Run `xcode-select --install` first, then retry.
+> **Não tem git?** Rode `xcode-select --install` primeiro e tente novamente.
+
+---
+
+### Linux
+
+**Opção A — Uma linha:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/earlyaidopters/second-brain/main/setup.sh -o setup.sh && bash setup.sh
+```
+
+**Opção B — Clonar o repo:**
+
+```bash
+git clone https://github.com/earlyaidopters/second-brain.git
+cd second-brain
+./setup.sh
+```
+
+> **Pré-requisitos:** `git`, `python3` e `pip` devem estar instalados. Na maioria das distros já vêm por padrão. Se não:
+> ```bash
+> # Ubuntu/Debian
+> sudo apt install git python3 python3-pip python3-venv
+>
+> # Fedora
+> sudo dnf install git python3 python3-pip
+>
+> # Arch
+> sudo pacman -S git python python-pip
+> ```
+
+> **Obsidian no Linux** — o script instala automaticamente via Snap, Flatpak ou AppImage. Se preferir instalar manualmente:
+> ```bash
+> # Snap
+> sudo snap install obsidian --classic
+>
+> # Flatpak
+> flatpak install flathub md.obsidian.Obsidian
+>
+> # AppImage — baixe em https://obsidian.md/download
+> chmod +x Obsidian-*.AppImage && ./Obsidian-*.AppImage
+> ```
 
 ---
 
 ### Windows
 
-> **First: do you have git?**
-> Open **PowerShell** (press `Win`, type `powershell`, hit Enter) and run:
+> **Primeiro: você tem git?**
+> Abra o **PowerShell** (pressione `Win`, digite `powershell`, Enter) e rode:
 > ```powershell
 > git --version
 > ```
-> If you see a version number, you're good. If not, install git from [git-scm.com](https://git-scm.com/download/win) — use all the default options during install, then reopen PowerShell.
+> Se aparecer um número de versão, está ok. Senão, instale pelo [git-scm.com](https://git-scm.com/download/win) — use todas as opções padrão e reabra o PowerShell.
 
-**Option A — One-liner** (paste this into PowerShell and hit Enter):
+**Opção A — Uma linha** (cole no PowerShell e pressione Enter):
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/earlyaidopters/second-brain/main/setup.ps1" -OutFile setup.ps1; powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
-**Option B — Clone the repo:**
-
-Once git is ready, run:
+**Opção B — Clonar o repo:**
 
 ```powershell
 git clone https://github.com/earlyaidopters/second-brain.git
@@ -87,195 +127,199 @@ cd second-brain
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
-> **"Running scripts is disabled" error?** That's a Windows safety setting. The `-ExecutionPolicy Bypass` part in the command above overrides it just for this one script — it doesn't change anything permanent on your computer.
+> **Erro "execução de scripts desabilitada"?** É uma configuração de segurança do Windows. O `-ExecutionPolicy Bypass` no comando acima ignora isso apenas para este script — não muda nada permanente no seu computador.
 
-> **Python not found warning?** Download Python from [python.org/downloads](https://python.org/downloads) — on the first screen of the installer, check **"Add Python to PATH"** before clicking Install. Then rerun the setup script.
-
----
-
-The script handles the rest: installs Obsidian, installs Claude Code, creates your vault, and optionally imports your existing files.
+> **Python não encontrado?** Baixe em [python.org/downloads](https://python.org/downloads) — na primeira tela do instalador, marque **"Add Python to PATH"** antes de clicar em Install. Depois rode o script de setup novamente.
 
 ---
 
-## Why This Exists
-
-You've tried to build a second brain before.
-
-Maybe Notion. Maybe Apple Notes. Maybe a folder of markdown files you swore you'd organize.
-
-Every time, the same outcome: you'd set it up, use it for a week, and then completely forget it existed.
-
-The problem was never the tool. **It was that you had to remember to use it.**
-
-This wires **Obsidian** (your local knowledge vault) to **Claude Code** (your AI agent) so that:
-
-- Claude Code **reads your notes** before answering — it knows your projects, your clients, your voice
-- Claude Code **writes your notes** after working — your vault builds itself from your sessions
-- Your existing files (PDFs, docs, slides) get **synthesized and imported automatically** via Gemini 3 Flash
-- Everything stays **local, private, and yours** — no cloud lock-in, no subscription creep
-
-The result: an AI that knows who you are from the first prompt of every session. Not because you told it. Because it read your vault.
+O script cuida do resto: instala Obsidian, instala Claude Code, cria seu vault e opcionalmente importa seus arquivos existentes.
 
 ---
 
-## What Gets Installed
+## Por que Isso Existe
 
-| Tool | What it is | Why |
-|------|-----------|-----|
-| **Obsidian** | Free note-taking app | Your notes live as plain `.md` files on your computer — no cloud, no subscription, yours forever |
-| **Claude Code** | Anthropic's AI terminal | Reads and writes files directly in your vault — no copy-pasting, no switching tabs |
-| **Python packages** | Background libraries | Used by Gemini 3 Flash to read and synthesize your existing files (PDFs, docs, slides) |
-| **Vault skills** | Slash commands | `/vault-setup` `/daily` `/tldr` `/file-intel` — teach Claude how to work with your vault |
-| **Obsidian Skills** *(optional)* | Official skills by [Kepano](https://github.com/kepano) (Obsidian CEO) | Lets Claude navigate, read, and write your vault natively using the Obsidian CLI |
+Você já tentou criar um segundo cérebro antes.
 
-> **Nothing is uploaded.** Your vault is a folder on your computer. Claude Code reads it locally. The only optional network call is Gemini file processing — and that's fully skippable.
+Talvez Notion. Talvez Apple Notes. Talvez uma pasta de arquivos markdown que você jurou que ia organizar.
+
+Toda vez, o mesmo resultado: você configurava, usava por uma semana, e depois esquecia completamente que existia.
+
+O problema nunca foi a ferramenta. **Era que você precisava lembrar de usá-la.**
+
+Isto conecta o **Obsidian** (seu vault local de conhecimento) ao **Claude Code** (seu agente de IA) para que:
+
+- Claude Code **leia suas notas** antes de responder — ele conhece seus projetos, seus clientes, sua voz
+- Claude Code **escreva suas notas** depois de trabalhar — seu vault se constrói sozinho a partir das sessões
+- Seus arquivos existentes (PDFs, docs, slides) são **sintetizados e importados automaticamente** via Gemini 3 Flash
+- Tudo fica **local, privado e seu** — sem lock-in de nuvem, sem assinaturas crescentes
+
+O resultado: uma IA que sabe quem você é desde o primeiro prompt de cada sessão. Não porque você contou. Porque ela leu seu vault.
 
 ---
 
-## What the Setup Script Does
+## O que é Instalado
+
+| Ferramenta | O que é | Para quê |
+|------------|---------|----------|
+| **Obsidian** | App gratuito de notas | Suas notas vivem como arquivos `.md` no seu computador — sem nuvem, sem assinatura, seus para sempre |
+| **Claude Code** | Terminal IA da Anthropic | Lê e escreve arquivos diretamente no seu vault — sem copiar/colar, sem trocar de aba |
+| **Pacotes Python** | Bibliotecas de fundo | Usadas pelo Gemini 3 Flash para ler e sintetizar seus arquivos existentes (PDFs, docs, slides) |
+| **Vault skills** | Slash commands | `/vault-setup` `/daily` `/tldr` `/file-intel` — ensinam o Claude a trabalhar com seu vault |
+| **Obsidian Skills** *(opcional)* | Skills oficiais do [Kepano](https://github.com/kepano) (CEO do Obsidian) | Permite ao Claude navegar, ler e escrever seu vault nativamente usando a CLI do Obsidian |
+
+> **Nada é enviado para servidores.** Seu vault é uma pasta no seu computador. Claude Code lê localmente. A única chamada de rede opcional é o processamento via Gemini — e é totalmente pulável.
+
+---
+
+## O que o Script de Setup Faz
 
 ```
-Step 1 — Check dependencies       (Homebrew on Mac / winget on Windows)
-Step 2 — Install Obsidian         (free, local note-taking app)
-Step 3 — Install Claude Code CLI  (Anthropic's AI terminal)
-Step 4 — Install Python packages  (for Gemini file processing)
-Step 5 — Create your vault        (inbox, daily, projects, research, archive + skills)
-Step 6 — Import existing files    (optional — Gemini reads and synthesizes them)
-Step 7 — Obsidian Skills          (optional — official skills by Kepano, Obsidian CEO)
-         └─> Opens Obsidian pointed at your new vault
+Passo 1 — Verificar dependências       (Homebrew no Mac / winget no Windows / apt/dnf/pacman no Linux)
+Passo 2 — Instalar Obsidian            (app gratuito de notas local)
+Passo 3 — Instalar Claude Code CLI     (terminal IA da Anthropic)
+Passo 4 — Instalar pacotes Python      (para processamento de arquivos via Gemini)
+Passo 5 — Criar seu vault              (inbox, daily, projects, research, archive + skills)
+Passo 6 — Importar arquivos existentes (opcional — Gemini lê e sintetiza)
+Passo 7 — Obsidian Skills              (opcional — skills oficiais do Kepano, CEO do Obsidian)
+           └─> Abre o Obsidian apontando para seu novo vault
 ```
 
 ---
 
-## After Setup
+## Depois do Setup
 
-### 1. Enable the Obsidian CLI
+### 1. Habilitar a CLI do Obsidian
 ```
 Obsidian → Settings → General → Enable Command Line Interface
 ```
-This adds the `obsidian` command to your PATH so you can open your vault from the terminal. ([CLI docs](https://help.obsidian.md/cli))
+Isso adiciona o comando `obsidian` ao seu PATH para abrir o vault pelo terminal. ([Docs da CLI](https://help.obsidian.md/cli))
 
-### 2. Open Claude Code in your vault
+### 2. Abrir o Claude Code no seu vault
 ```bash
 cd ~/second-brain
 claude
 ```
 
-### 3. Run your first command
+### 3. Rodar seu primeiro comando
 ```
 /vault-setup
 ```
 
-Claude Code will interview you about your role and work, then generate a personalized `CLAUDE.md` and suggest slash commands for your specific workflow. Business owner gets different folders than a developer. Creator gets different slash commands than a consultant.
+O Claude Code vai te entrevistar sobre seu papel e trabalho, depois gerar um `CLAUDE.md` personalizado e sugerir slash commands para seu fluxo de trabalho específico. Um empresário recebe pastas diferentes de um desenvolvedor. Um criador de conteúdo recebe comandos diferentes de um consultor.
 
 ---
 
 ## Slash Commands
 
-Four commands come pre-installed. More get added as you use the system.
+Quatro comandos vêm pré-instalados. Mais são adicionados conforme você usa o sistema.
 
-| Command | What it does |
-|---------|-------------|
-| `/vault-setup` | Interviews you (role, projects, goals) and generates your personalized vault structure + CLAUDE.md + custom slash commands |
-| `/daily` | Starts your day — reads today's note or creates one, surfaces your top priorities, asks what you're working on |
-| `/tldr` | At the end of any session, saves a structured summary to the right folder in your vault automatically |
-| `/file-intel` | Point it at any folder — Gemini reads every file and generates Obsidian-ready summaries into your inbox |
+| Comando | O que faz |
+|---------|-----------|
+| `/vault-setup` | Te entrevista (papel, projetos, objetivos) e gera estrutura personalizada do vault + CLAUDE.md + slash commands customizados |
+| `/daily` | Começa seu dia — lê a nota de hoje ou cria uma, mostra prioridades, pergunta no que você está trabalhando |
+| `/tldr` | No final de qualquer sessão, salva um resumo estruturado na pasta certa do vault automaticamente |
+| `/file-intel` | Aponte para qualquer pasta — Gemini lê cada arquivo e gera resumos prontos para Obsidian no seu inbox |
 
-> **Important:** Slash commands only activate when Claude Code is opened from inside your vault folder. Always `cd` into your vault before running `claude`.
+> **Importante:** Slash commands só ativam quando o Claude Code é aberto de dentro da pasta do vault. Sempre faça `cd` para o vault antes de rodar `claude`.
 >
 > ```bash
-> cd ~/second-brain   # Mac
+> cd ~/second-brain              # Mac / Linux
 > cd $env:USERPROFILE\second-brain   # Windows
 > claude
 > ```
 >
-> **Want them available everywhere?** Once inside Claude Code, just ask:
-> *"Make these slash commands global so they work in any folder"*
-> Claude Code will copy the skills to `~/.claude/skills/` for you.
+> **Quer que funcionem em qualquer lugar?** Dentro do Claude Code, peça:
+> *"Faça esses slash commands globais para funcionarem em qualquer pasta"*
+> O Claude Code vai copiar os skills para `~/.claude/skills/`.
 
 ---
 
-## Importing Existing Files
+## Importando Arquivos Existentes
 
-Have years of PDFs, Word docs, and slide decks sitting in folders? Don't manually convert them.
+Tem anos de PDFs, documentos Word e apresentações guardados em pastas? Não converta manualmente.
 
 ```bash
-python3 scripts/process_docs_to_obsidian.py ~/your-files ~/second-brain/inbox
+python3 scripts/process_docs_to_obsidian.py ~/seus-arquivos ~/second-brain/inbox
 ```
 
-**What happens:**
-1. Every file gets read by **Gemini 3 Flash** (`gemini-3-flash-preview`)
-2. Signal is extracted, noise is discarded (legal boilerplate, headers, filler)
-3. A clean compressed Markdown note is saved to your `inbox/` (300–600 words max)
+**O que acontece:**
+1. Cada arquivo é lido pelo **Gemini 3 Flash** (`gemini-3-flash-preview`)
+2. O sinal é extraído, o ruído é descartado (boilerplate jurídico, cabeçalhos, enchimento)
+3. Uma nota Markdown limpa e compacta é salva no seu `inbox/` (300–600 palavras máx.)
 
-Then open Claude Code and say: *"Sort everything in inbox/ into the right folders."*
+Depois abra o Claude Code e diga: *"Organize tudo no inbox/ nas pastas certas."*
 
-It reads your CLAUDE.md, understands your vault structure, and routes every note to where it belongs.
+Ele lê seu CLAUDE.md, entende a estrutura do vault e encaminha cada nota para onde pertence.
 
-**Supported formats:** `.pdf` `.docx` `.pptx` `.txt` `.md`
+**Formatos suportados:** `.pdf` `.docx` `.pptx` `.txt` `.md`
 
-> **Have Excel, CSV, or JSON files too?** Use the broader script instead:
+> **Tem arquivos Excel, CSV ou JSON também?** Use o script mais abrangente:
 > ```bash
-> python3 scripts/process_files_with_gemini.py ~/your-files
+> python3 scripts/process_files_with_gemini.py ~/seus-arquivos
 > ```
-> This handles `.xlsx` `.csv` `.json` `.xml` `.py` `.js` `.html` and most text-based files. Results land in `outputs/file_summaries/` with a `MASTER_SUMMARY.md` digest of everything.
+> Ele processa `.xlsx` `.csv` `.json` `.xml` `.py` `.js` `.html` e a maioria dos arquivos baseados em texto. Resultados ficam em `outputs/file_summaries/` com um `MASTER_SUMMARY.md` resumindo tudo.
 
 ---
 
-## How the Memory Works
+## Como a Memória Funciona
 
-Your vault is structured so Claude Code can find the right context for any task:
+Seu vault é estruturado para que o Claude Code encontre o contexto certo para qualquer tarefa:
 
 ```
 ~/second-brain/
-├── CLAUDE.md        ← The brain of the brain. Read at every session start.
-├── memory.md        ← Session log. Updated by Claude Code after each conversation.
-├── inbox/           ← Drop zone. Anything new lands here first.
-├── daily/           ← Daily notes (YYYY-MM-DD.md). Your running log.
-├── projects/        ← Active projects. Claude reads the relevant one before helping.
-├── research/        ← Synthesized knowledge. Sources, notes, ideas.
-└── archive/         ← Completed work. Never delete — just archive.
+├── CLAUDE.md        ← O cérebro do cérebro. Lido no início de cada sessão.
+├── memory.md        ← Log de sessões. Atualizado pelo Claude Code após cada conversa.
+├── inbox/           ← Zona de entrada. Qualquer coisa nova cai aqui primeiro.
+├── daily/           ← Notas diárias (YYYY-MM-DD.md). Seu log contínuo.
+├── projects/        ← Projetos ativos. Claude lê o relevante antes de ajudar.
+├── research/        ← Conhecimento sintetizado. Fontes, notas, ideias.
+└── archive/         ← Trabalho concluído. Nunca delete — apenas archive.
 ```
 
-**The compounding effect:**
-- Session 1: Claude knows your folder structure
-- Session 5: Claude knows your projects, your voice, your preferences
-- Session 20: Claude is your personalized operating system — it knows more about your knowledge base than you consciously remember
+**O efeito composto:**
+- Sessão 1: Claude conhece a estrutura das suas pastas
+- Sessão 5: Claude conhece seus projetos, sua voz, suas preferências
+- Sessão 20: Claude é seu sistema operacional personalizado — sabe mais sobre sua base de conhecimento do que você lembra conscientemente
+
+> **Nota:** A atualização da memória **não é automática**. Você precisa rodar `/tldr` no final de cada sessão para salvar o resumo, e `/daily` no início do dia para carregar o contexto. Os arquivos não se atualizam sozinhos em background.
 
 ---
 
-## Requirements
+## Requisitos
 
-| Tool | Platform | How to get it |
-|------|----------|--------------|
-| Obsidian | macOS / Windows / Linux | `brew install --cask obsidian` or `winget install Obsidian.Obsidian` |
+| Ferramenta | Plataforma | Como obter |
+|------------|-----------|------------|
+| Obsidian | macOS | `brew install --cask obsidian` |
+| Obsidian | Windows | `winget install Obsidian.Obsidian` |
+| Obsidian | Linux | `snap install obsidian --classic` ou `flatpak install flathub md.obsidian.Obsidian` ou [AppImage](https://obsidian.md/download) |
 | Claude Code | macOS / Linux | `curl -fsSL https://claude.ai/install.sh \| sh` |
 | Claude Code | Windows | `winget install Anthropic.ClaudeCode` |
-| Python 3.8+ | All | [python.org](https://python.org) |
-| Google API key | All | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) — free |
-| Claude account | All | [claude.ai](https://claude.ai) — Pro recommended for heavy use |
+| Python 3.8+ | Todas | [python.org](https://python.org) |
+| Chave API Google | Todas | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) — grátis |
+| Conta Claude | Todas | [claude.ai](https://claude.ai) — Pro recomendado para uso intenso |
 
 ---
 
-## Repository Structure
+## Estrutura do Repositório
 
 ```
 second-brain/
-├── setup.sh                              ← macOS/Linux one-command setup
-├── setup.ps1                             ← Windows one-command setup
-├── CLAUDE.md                             ← Vault system file (personalized by /vault-setup)
-├── memory.md                             ← Session memory (auto-updated by Claude Code)
-├── requirements.txt                      ← Python dependencies
-├── .env.example                          ← Copy to .env, add your Google API key
-├── .gitignore                            ← Keeps .env and .venv out of git
+├── setup.sh                              ← Setup macOS/Linux (um comando)
+├── setup.ps1                             ← Setup Windows (um comando)
+├── CLAUDE.md                             ← Arquivo de sistema do vault (personalizado pelo /vault-setup)
+├── memory.md                             ← Memória de sessão (atualizado pelo Claude Code)
+├── requirements.txt                      ← Dependências Python
+├── .env.example                          ← Copie para .env, adicione sua chave API Google
+├── .gitignore                            ← Mantém .env e .venv fora do git
 ├── scripts/
-│   ├── process_docs_to_obsidian.py      ← Gemini 3 Flash file synthesizer
-│   └── process_files_with_gemini.py     ← Batch Gemini file processor
+│   ├── process_docs_to_obsidian.py      ← Sintetizador de arquivos via Gemini 3 Flash
+│   └── process_files_with_gemini.py     ← Processador batch Gemini
 ├── skills/
-│   ├── vault-setup/SKILL.md             ← Interactive vault configurator
-│   ├── daily/SKILL.md                   ← Daily standup command
-│   ├── tldr/SKILL.md                    ← Session summary command
-│   └── file-intel/SKILL.md              ← Process any folder via Gemini
+│   ├── vault-setup/SKILL.md             ← Configurador interativo do vault
+│   ├── daily/SKILL.md                   ← Comando de standup diário
+│   ├── tldr/SKILL.md                    ← Comando de resumo de sessão
+│   └── file-intel/SKILL.md              ← Processar qualquer pasta via Gemini
 └── vault-template/
     ├── inbox/   daily/   projects/
     ├── research/   archive/
@@ -283,31 +327,31 @@ second-brain/
 
 ---
 
-## Manual Setup
+## Setup Manual
 
 <details>
-<summary>Prefer to install each piece yourself? Click to expand the full step-by-step for both platforms.</summary>
+<summary>Prefere instalar cada peça manualmente? Clique para expandir o passo a passo completo para todas as plataformas.</summary>
 
 ---
 
-### macOS — Manual Steps
+### macOS — Passos Manuais
 
-**1. Install Homebrew** (macOS app installer — skip if you have it)
+**1. Instalar Homebrew** (instalador de apps do macOS — pule se já tem)
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-**2. Install Obsidian**
+**2. Instalar Obsidian**
 ```bash
 brew install --cask obsidian
 ```
 
-**3. Install Claude Code**
+**3. Instalar Claude Code**
 ```bash
 curl -fsSL https://claude.ai/install.sh | sh
 ```
 
-**4. Download and set up the vault**
+**4. Baixar e configurar o vault**
 ```bash
 git clone https://github.com/earlyaidopters/second-brain.git
 mkdir -p ~/second-brain/{inbox,daily,projects,research,archive,.claude/skills/vault-setup,.claude/skills/daily,.claude/skills/tldr,.claude/skills/file-intel,scripts}
@@ -320,11 +364,11 @@ cp second-brain/scripts/* ~/second-brain/scripts/
 cp second-brain/.env.example ~/second-brain/.env
 ```
 
-**5. Add your Google API key**
+**5. Adicionar sua chave API Google**
 
-Open `~/second-brain/.env` in any text editor and replace `your_key_here` with your key from [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
+Abra `~/second-brain/.env` em qualquer editor e substitua `your_key_here` pela sua chave de [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
 
-**6. (Optional) Install Kepano's Obsidian Skills**
+**6. (Opcional) Instalar Obsidian Skills do Kepano**
 ```bash
 git clone --depth=1 https://github.com/kepano/obsidian-skills.git /tmp/obs-skills
 for d in /tmp/obs-skills/skills/*/; do
@@ -335,33 +379,107 @@ done
 rm -rf /tmp/obs-skills
 ```
 
-**7. Open Claude Code in your vault**
+**7. Abrir Claude Code no vault**
 ```bash
 cd ~/second-brain && claude
 ```
 
 ---
 
-### Windows — Manual Steps
+### Linux — Passos Manuais
 
-Open **PowerShell** for all commands below.
+**1. Instalar dependências**
+```bash
+# Ubuntu/Debian
+sudo apt update && sudo apt install -y git python3 python3-pip python3-venv curl
 
-**1. Install Obsidian**
+# Fedora
+sudo dnf install -y git python3 python3-pip curl
+
+# Arch
+sudo pacman -S --noconfirm git python python-pip curl
+```
+
+**2. Instalar Obsidian**
+```bash
+# Opção 1: Snap (Ubuntu e derivados)
+sudo snap install obsidian --classic
+
+# Opção 2: Flatpak
+flatpak install flathub md.obsidian.Obsidian
+
+# Opção 3: AppImage
+# Baixe o .AppImage em https://obsidian.md/download
+chmod +x Obsidian-*.AppImage
+./Obsidian-*.AppImage
+```
+
+**3. Instalar Claude Code**
+```bash
+curl -fsSL https://claude.ai/install.sh | sh
+```
+
+**4. Baixar e configurar o vault**
+```bash
+git clone https://github.com/earlyaidopters/second-brain.git
+mkdir -p ~/second-brain/{inbox,daily,projects,research,archive,.claude/skills/vault-setup,.claude/skills/daily,.claude/skills/tldr,.claude/skills/file-intel,scripts}
+cp second-brain/CLAUDE.md second-brain/memory.md ~/second-brain/
+cp second-brain/skills/vault-setup/SKILL.md ~/second-brain/.claude/skills/vault-setup/
+cp second-brain/skills/daily/SKILL.md ~/second-brain/.claude/skills/daily/
+cp second-brain/skills/tldr/SKILL.md ~/second-brain/.claude/skills/tldr/
+cp second-brain/skills/file-intel/SKILL.md ~/second-brain/.claude/skills/file-intel/
+cp second-brain/scripts/* ~/second-brain/scripts/
+cp second-brain/.env.example ~/second-brain/.env
+```
+
+**5. Instalar dependências Python**
+```bash
+python3 -m venv ~/.second-brain-venv
+~/.second-brain-venv/bin/pip install -r second-brain/requirements.txt
+```
+
+**6. Adicionar sua chave API Google**
+
+Abra `~/second-brain/.env` em qualquer editor e substitua `your_key_here` pela sua chave de [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
+
+**7. (Opcional) Instalar Obsidian Skills do Kepano**
+```bash
+git clone --depth=1 https://github.com/kepano/obsidian-skills.git /tmp/obs-skills
+for d in /tmp/obs-skills/skills/*/; do
+  name=$(basename "$d")
+  mkdir -p ~/second-brain/.claude/skills/$name
+  cp "$d/SKILL.md" ~/second-brain/.claude/skills/$name/
+done
+rm -rf /tmp/obs-skills
+```
+
+**8. Abrir Claude Code no vault**
+```bash
+cd ~/second-brain && claude
+```
+
+---
+
+### Windows — Passos Manuais
+
+Abra o **PowerShell** para todos os comandos abaixo.
+
+**1. Instalar Obsidian**
 ```powershell
 winget install Obsidian.Obsidian
 ```
 
-**2. Install Claude Code**
+**2. Instalar Claude Code**
 ```powershell
 winget install Anthropic.ClaudeCode
 ```
-Close and reopen PowerShell after this step.
+Feche e reabra o PowerShell após este passo.
 
-**3. Install Python** (if you don't have it)
+**3. Instalar Python** (se não tem)
 
-Download from [python.org/downloads](https://python.org/downloads). On the installer's first screen, check **"Add Python to PATH"** before clicking Install.
+Baixe de [python.org/downloads](https://python.org/downloads). Na primeira tela do instalador, marque **"Add Python to PATH"** antes de clicar em Install.
 
-**4. Download and set up the vault**
+**4. Baixar e configurar o vault**
 ```powershell
 git clone https://github.com/earlyaidopters/second-brain.git
 $vault = "$env:USERPROFILE\second-brain"
@@ -375,16 +493,16 @@ Copy-Item "second-brain\scripts\*" "$vault\scripts\"
 Copy-Item "second-brain\.env.example" "$vault\.env"
 ```
 
-**5. Install Python dependencies**
+**5. Instalar dependências Python**
 ```powershell
 pip install -r second-brain\requirements.txt
 ```
 
-**6. Add your Google API key**
+**6. Adicionar sua chave API Google**
 
-Open `%USERPROFILE%\second-brain\.env` in Notepad and replace `your_key_here` with your key from [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
+Abra `%USERPROFILE%\second-brain\.env` no Bloco de Notas e substitua `your_key_here` pela sua chave de [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
 
-**7. (Optional) Install Kepano's Obsidian Skills**
+**7. (Opcional) Instalar Obsidian Skills do Kepano**
 ```powershell
 $tmp = "$env:TEMP\obs-skills"
 git clone --depth=1 https://github.com/kepano/obsidian-skills.git $tmp
@@ -396,7 +514,7 @@ Get-ChildItem "$tmp\skills" -Directory | ForEach-Object {
 Remove-Item $tmp -Recurse -Force
 ```
 
-**8. Open Claude Code in your vault**
+**8. Abrir Claude Code no vault**
 ```powershell
 cd "$env:USERPROFILE\second-brain"
 claude
@@ -406,26 +524,32 @@ claude
 
 ---
 
-## FAQ
+## Perguntas Frequentes
 
-**Is my data private?**
-Yes. Obsidian stores everything as local markdown files on your computer. Nothing is uploaded to any server. Claude Code processes your files locally in the folder you open it in. The only time anything leaves your machine is when you call the Gemini API to process existing files — and that's optional.
+**Meus dados são privados?**
+Sim. O Obsidian armazena tudo como arquivos markdown locais no seu computador. Nada é enviado para nenhum servidor. O Claude Code processa seus arquivos localmente na pasta onde você o abre. A única vez que algo sai da sua máquina é quando você chama a API do Gemini para processar arquivos existentes — e isso é opcional.
 
-**Do I need a paid Claude account?**
-The free tier works for light use. For daily use with long sessions, Claude Pro ($20/month) gives substantially more usage than equivalent API costs in other tools.
+**Preciso de uma conta Claude paga?**
+O tier gratuito funciona para uso leve. Para uso diário com sessões longas, o Claude Pro (US$ 20/mês) oferece substancialmente mais uso do que custos equivalentes de API em outras ferramentas.
 
-**What if I already have an Obsidian vault?**
-The setup script asks where your vault is. Point it at your existing vault — it'll copy the CLAUDE.md template, skills, and scripts into it without touching your existing notes.
+**E se eu já tiver um vault do Obsidian?**
+O script de setup pergunta onde fica seu vault. Aponte para o vault existente — ele vai copiar o template do CLAUDE.md, skills e scripts sem tocar nas suas notas existentes.
 
-**Can I use this without the file processing?**
-Absolutely. The Gemini API key and file processing are optional. The core system (Obsidian + Claude Code + CLAUDE.md + slash commands) works without it.
+**Posso usar sem o processamento de arquivos?**
+Com certeza. A chave API do Gemini e o processamento de arquivos são opcionais. O sistema central (Obsidian + Claude Code + CLAUDE.md + slash commands) funciona sem isso.
+
+**O Obsidian é obrigatório?**
+Não. O vault é feito de arquivos Markdown comuns. Você pode usar qualquer editor (VS Code, Typora, Neovim, etc.). O Obsidian agrega valor pelo graph view, plugins da comunidade e CLI integrada, mas não é requisito.
+
+**As notas se atualizam sozinhas?**
+Não. Você precisa rodar `/daily` no início do dia e `/tldr` no final de cada sessão. Não há automação em background — tudo é acionado manualmente por comando.
 
 ---
 
 <div align="center">
 
-Built by [Mark Kashef](https://youtube.com/@marwankashef) · [Prompt Advisers](https://promptadvisers.com)
+Criado por [Mark Kashef](https://youtube.com/@marwankashef) · [Prompt Advisers](https://promptadvisers.com)
 
-*If this helped you build your second brain, drop a ⭐ — it helps others find it.*
+*Se isso te ajudou a criar seu segundo cérebro, deixe uma ⭐ — ajuda outros a encontrar.*
 
 </div>
