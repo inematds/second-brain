@@ -548,8 +548,6 @@ Não. Você precisa rodar `/daily` no início do dia e `/tldr` no final de cada 
 
 <div align="center">
 
-Criado por [Mark Kashef](https://youtube.com/@marwankashef) · [Prompt Advisers](https://promptadvisers.com)
-
 *Se isso te ajudou a criar seu segundo cérebro, deixe uma ⭐ — ajuda outros a encontrar.*
 
 </div>
