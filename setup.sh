@@ -74,32 +74,85 @@ echo ""
 echo -e "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# ─── STEP 1: Check OS ───────────────────────────────────────────────────────
-if [[ "$OSTYPE" != "darwin"* ]]; then
-  echo -e "${ORANGE}⚠️  This setup script is currently macOS only.${RESET}"
+# ─── STEP 1: Detect OS ──────────────────────────────────────────────────────
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PLATFORM="macos"
+elif [[ "$OSTYPE" == "linux"* ]]; then
+  PLATFORM="linux"
+else
+  echo -e "${ORANGE}⚠️  This setup script supports macOS and Linux.${RESET}"
   echo "   Windows: run setup.ps1 instead."
   exit 1
 fi
 
-echo -e "${WHITE}Step 1/7 — Checking dependencies + Homebrew${RESET}"
+echo -e "${WHITE}Step 1/7 — Checking dependencies${RESET}"
+echo -e "  ${DIM}Detected platform: $PLATFORM${RESET}"
 
-# ─── STEP 2: Homebrew ────────────────────────────────────────────────────────
-if ! command -v brew &>/dev/null; then
-  echo "  Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  echo -e "  ${GREEN}✓${RESET} Homebrew already installed"
+# ─── STEP 2: Package manager ────────────────────────────────────────────────
+if [[ "$PLATFORM" == "macos" ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo "  Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    echo -e "  ${GREEN}✓${RESET} Homebrew already installed"
+  fi
+elif [[ "$PLATFORM" == "linux" ]]; then
+  # Detect Linux package manager
+  if command -v apt &>/dev/null; then
+    PKG_MGR="apt"
+    echo -e "  ${GREEN}✓${RESET} Package manager: apt (Debian/Ubuntu)"
+  elif command -v dnf &>/dev/null; then
+    PKG_MGR="dnf"
+    echo -e "  ${GREEN}✓${RESET} Package manager: dnf (Fedora/RHEL)"
+  elif command -v pacman &>/dev/null; then
+    PKG_MGR="pacman"
+    echo -e "  ${GREEN}✓${RESET} Package manager: pacman (Arch)"
+  else
+    PKG_MGR="unknown"
+    echo -e "  ${ORANGE}⚠${RESET}  Could not detect package manager — you may need to install dependencies manually"
+  fi
 fi
 
 # ─── STEP 3: Obsidian ────────────────────────────────────────────────────────
 echo ""
 echo -e "${WHITE}Step 2/7 — Installing Obsidian${RESET}"
-if ! brew list --cask obsidian &>/dev/null 2>&1; then
-  echo "  Installing Obsidian..."
-  brew install --cask obsidian
-  echo -e "  ${GREEN}✓${RESET} Obsidian installed"
-else
-  echo -e "  ${GREEN}✓${RESET} Obsidian already installed"
+
+install_obsidian_linux() {
+  # Try Snap first, then Flatpak, then suggest AppImage
+  if command -v snap &>/dev/null; then
+    echo "  Installing Obsidian via Snap..."
+    sudo snap install obsidian --classic \
+      && echo -e "  ${GREEN}✓${RESET} Obsidian installed (Snap)" \
+      || echo -e "  ${ORANGE}⚠${RESET}  Snap install failed — try: flatpak install flathub md.obsidian.Obsidian"
+  elif command -v flatpak &>/dev/null; then
+    echo "  Installing Obsidian via Flatpak..."
+    flatpak install -y flathub md.obsidian.Obsidian \
+      && echo -e "  ${GREEN}✓${RESET} Obsidian installed (Flatpak)" \
+      || echo -e "  ${ORANGE}⚠${RESET}  Flatpak install failed — download AppImage from https://obsidian.md/download"
+  else
+    echo -e "  ${ORANGE}⚠${RESET}  Neither Snap nor Flatpak found."
+    echo -e "  ${DIM}  Install Obsidian manually:${RESET}"
+    echo -e "  ${DIM}    - Snap: sudo snap install obsidian --classic${RESET}"
+    echo -e "  ${DIM}    - Flatpak: flatpak install flathub md.obsidian.Obsidian${RESET}"
+    echo -e "  ${DIM}    - AppImage: https://obsidian.md/download${RESET}"
+  fi
+}
+
+if [[ "$PLATFORM" == "macos" ]]; then
+  if ! brew list --cask obsidian &>/dev/null 2>&1; then
+    echo "  Installing Obsidian..."
+    brew install --cask obsidian
+    echo -e "  ${GREEN}✓${RESET} Obsidian installed"
+  else
+    echo -e "  ${GREEN}✓${RESET} Obsidian already installed"
+  fi
+elif [[ "$PLATFORM" == "linux" ]]; then
+  # Check if Obsidian is already available
+  if command -v obsidian &>/dev/null || snap list obsidian &>/dev/null 2>&1 || flatpak list 2>/dev/null | grep -q obsidian; then
+    echo -e "  ${GREEN}✓${RESET} Obsidian already installed"
+  else
+    install_obsidian_linux
+  fi
 fi
 
 # ─── STEP 4: Claude Code ─────────────────────────────────────────────────────
@@ -114,7 +167,7 @@ else
   echo -e "  ${GREEN}✓${RESET} Claude Code already installed"
 fi
 
-# ─── STEP 5: Python deps (venv to avoid PEP 668 on modern macOS) ─────────────
+# ─── STEP 5: Python deps (venv to avoid PEP 668) ─────────────────────────────
 echo ""
 echo -e "${WHITE}Step 4/7 — Installing Python dependencies${RESET}"
 if command -v python3 &>/dev/null; then
@@ -124,7 +177,11 @@ if command -v python3 &>/dev/null; then
     && echo -e "  ${GREEN}✓${RESET} Python packages installed" \
     || echo -e "  ${ORANGE}⚠${RESET}  pip install failed — try: pip3 install -r requirements.txt --break-system-packages"
 else
-  echo -e "  ${ORANGE}⚠${RESET}  Python 3 not found. Install: brew install python3"
+  if [[ "$PLATFORM" == "macos" ]]; then
+    echo -e "  ${ORANGE}⚠${RESET}  Python 3 not found. Install: brew install python3"
+  else
+    echo -e "  ${ORANGE}⚠${RESET}  Python 3 not found. Install: sudo apt install python3 python3-pip python3-venv"
+  fi
 fi
 
 # ─── STEP 6: Vault setup ─────────────────────────────────────────────────────
@@ -242,10 +299,18 @@ echo ""
 echo -e "  ${WHITE}Checking installation...${RESET}"
 echo ""
 
-if brew list --cask obsidian &>/dev/null 2>&1; then
-  echo -e "  ${GREEN}✓${RESET} Obsidian"
-else
-  echo -e "  ${ORANGE}✗${RESET} Obsidian — run: brew install --cask obsidian"
+if [[ "$PLATFORM" == "macos" ]]; then
+  if brew list --cask obsidian &>/dev/null 2>&1; then
+    echo -e "  ${GREEN}✓${RESET} Obsidian"
+  else
+    echo -e "  ${ORANGE}✗${RESET} Obsidian — run: brew install --cask obsidian"
+  fi
+elif [[ "$PLATFORM" == "linux" ]]; then
+  if command -v obsidian &>/dev/null || snap list obsidian &>/dev/null 2>&1 || flatpak list 2>/dev/null | grep -q obsidian; then
+    echo -e "  ${GREEN}✓${RESET} Obsidian"
+  else
+    echo -e "  ${ORANGE}✗${RESET} Obsidian — install via snap, flatpak, or AppImage (https://obsidian.md/download)"
+  fi
 fi
 
 if command -v claude &>/dev/null; then
@@ -257,7 +322,11 @@ fi
 if command -v python3 &>/dev/null; then
   echo -e "  ${GREEN}✓${RESET} $(python3 --version 2>&1)"
 else
-  echo -e "  ${ORANGE}✗${RESET} Python 3 not found — run: brew install python3"
+  if [[ "$PLATFORM" == "macos" ]]; then
+    echo -e "  ${ORANGE}✗${RESET} Python 3 not found — run: brew install python3"
+  else
+    echo -e "  ${ORANGE}✗${RESET} Python 3 not found — run: sudo apt install python3 python3-pip python3-venv"
+  fi
 fi
 
 if [ -f "$VAULT_PATH/CLAUDE.md" ]; then
@@ -283,4 +352,12 @@ echo -e "  ${CYAN}4.${RESET} Type ${DIM}/vault-setup${RESET} — Claude Code wil
 echo ""
 
 # Open Obsidian
-open -a Obsidian "$VAULT_PATH" 2>/dev/null || open -a Obsidian 2>/dev/null || true
+if [[ "$PLATFORM" == "macos" ]]; then
+  open -a Obsidian "$VAULT_PATH" 2>/dev/null || open -a Obsidian 2>/dev/null || true
+elif [[ "$PLATFORM" == "linux" ]]; then
+  if command -v obsidian &>/dev/null; then
+    obsidian "$VAULT_PATH" &>/dev/null &
+  elif command -v xdg-open &>/dev/null; then
+    xdg-open "$VAULT_PATH" &>/dev/null &
+  fi
+fi
